@@ -20,3 +20,33 @@
   <div class="line">But thou, meek lover of the good!</div>
   <div class="line">Find me, and turn thy back on heaven.</div>
 </div>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0d0d0d;
+  color: #f2f2f2;
+  font-family: "Georgia", serif;
+  height: 500vh; /* gives room to scroll */
+}
+
+.poem-container {
+  position: sticky;
+  top: 40%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  width: 80%;
+  margin: auto;
+}
+
+.line {
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.visible {
+  opacity: 1;
+}

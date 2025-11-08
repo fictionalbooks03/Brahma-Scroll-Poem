@@ -1,5 +1,56 @@
-# Brahma-Scroll-Poem
-<div class="poem-container" id="poem">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahma — Scroll Poem</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d0d;
+    color: #f2f2f2;
+    font-family: "Georgia", serif;
+    height: 500vh; /* allows scrolling */
+  }
+
+  .poem-container {
+    position: sticky;
+    top: 40%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    width: 80%;
+    margin: auto;
+  }
+
+  .line {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+    position: absolute;
+    width: 100%;
+  }
+
+  .line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="poem-container">
+  <h2>Brahma — Ralph Waldo Emerson</h2>
+
   <div class="line">If the red slayer think he slays,</div>
   <div class="line">Or if the slain think he is slain,</div>
   <div class="line">They know not well the subtle ways</div>
@@ -20,33 +71,28 @@
   <div class="line">But thou, meek lover of the good!</div>
   <div class="line">Find me, and turn thy back on heaven.</div>
 </div>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0d0d0d;
-  color: #f2f2f2;
-  font-family: "Georgia", serif;
-  height: 500vh; /* gives room to scroll */
-}
 
-.poem-container {
-  position: sticky;
-  top: 40%;
-  transform: translateY(-50%);
-  text-align: center;
-  font-size: 1.8rem;
-  line-height: 1.6;
-  width: 80%;
-  margin: auto;
-}
+<script>
+  const lines = document.querySelectorAll('.line');
+  const numLines = lines.length;
 
-.line {
-  opacity: 0;
-  transition: opacity 1s ease;
-  position: absolute;
-  width: 100%;
-}
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollTop / maxScroll;
 
-.visible {
-  opacity: 1;
-}
+    const index = Math.min(
+      numLines - 1,
+      Math.floor(scrollFraction * numLines * 1.2) // adjust speed
+    );
+
+    lines.forEach((line, i) => {
+      line.classList.toggle('visible', i === index);
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
